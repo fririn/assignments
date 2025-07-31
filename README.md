@@ -27,11 +27,11 @@
         - /usr/lib/systemd/user/*
 - ### Task #3 (optional)
     > Write a Dockerfile to build the following project: https://github.com/anza-xyz/agave.
-    - Write a script that compares the values of result and height from the following two endpoints:
+
+    > Write a script that compares the values of result and height from the following two endpoints:
     
         > Key: result
         https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=YourApiKeyToken
-    
         > Key: height
         https://api.blockcypher.com/v1/eth/main
 
