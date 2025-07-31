@@ -8,14 +8,14 @@
     > The function must accept the path to the file with URLs as its input parameter.
     > If any service returns an unavailable response, stop further checks.
 
-    **task1/task1.sh**
+    **task1/task1.sh**  
     Just run it with a -f flag and provide a filename with url list. --help also available.
 - ### Task #2
     > Write a simple daemon (configuration file) for systemd that will keep a process running and restart itself if the process crashes.
 
-    **task2/task2.service.**
-    You can link it in /etc/systemd/system/
-    or in any of the user directories:
+    **task2/task2.service.**  
+    You can link it in /etc/systemd/system/  
+    or in any of the user directories:  
 
         - $XDG_CONFIG_HOME/systemd/user/*
         - $HOME/.config/systemd/user/*

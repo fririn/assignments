@@ -1,0 +1,17 @@
+[Unit]
+Description=Getblock checkerrrrrr
+After=network.target
+
+[Service]
+Type=simple
+User=paul  
+WorkingDirectory=/home/paul/dev/frostlins.com/interview_getblock/task2
+ExecStart=/home/paul/dev/frostlins.com/interview_getblock/task2/check.sh
+Restart=always  
+RestartSec=3    
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=getblock_checker
+
+[Install]
+WantedBy=multi-user.target
