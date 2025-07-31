@@ -16,6 +16,7 @@
     **task2/task2.service.**
     You can link it in /etc/systemd/system/
     or in any of the user directories:
+
         - $XDG_CONFIG_HOME/systemd/user/*
         - $HOME/.config/systemd/user/*
         - /etc/systemd/user/*
