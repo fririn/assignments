@@ -1,7 +1,6 @@
-
 # Test assignments.
 
-- ## Task #1
+ - [x] **Task #1**
     > You need to iterate through a list of URLs and check their availability. Conditions:
     > The list of URLs is located in the file /urls.txt.
     > A URL is considered available if its response code is not 5XX or 4XX.
@@ -9,21 +8,21 @@
     > The function must accept the path to the file with URLs as its input parameter.
     > If any service returns an unavailable response, stop further checks.
 
-    File: **task1/task1.sh**
+    File: **task1/task1.sh**  
     Just run it with a -f flag and provide a filename with url list. --help also available.
-- ## Task #2
+ - [x] **Task #2**
     > Write a simple daemon (configuration file) for systemd that will keep a process running and restart itself if the process crashes.
 
-    File: **task2/task2.service.**
+    File: **task2/task2.service.**  
     You can link it in /etc/systemd/system/ or in any of the user directories.
 
-- ## Task #3 (optional)
+ - [ ] **Task #3 (optional)**
     > Write a Dockerfile to build the following project: https://github.com/anza-xyz/agave.
     
-    File**task3/Dockerfile** -- in-progress
+    File: **task3/Dockerfile** -- in-progress  
     Build it with "docker build -t name:tag ."
 
-- ## Task #4 (?)
+ - [ ] **Task #4 (?)**
     > Write a script that compares the values of result and height from the following two endpoints:
         > Key: result
         https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=YourApiKeyToken
