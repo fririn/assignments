@@ -33,8 +33,10 @@
 
  - [ ] **Task #4 (?)**
     > Write a script that compares the values of result and height from the following two endpoints:
-        > Key: result
-        https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=YourApiKeyToken
-        > Key: height
-        https://api.blockcypher.com/v1/eth/main
+    >
+    > Key: result
+    > https://api.etherscan.io/api?module=proxy&action=eth_blockNumber&apikey=YourApiKeyToken
+    > 
+    > Key: height
+    > https://api.blockcypher.com/v1/eth/main
 
