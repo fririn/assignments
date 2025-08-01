@@ -1,0 +1,62 @@
+services:
+  solana-validator:
+    image: agave-validator:v1.1
+    container_name: agave-validator
+    restart: unless-stopped
+    ports:
+      - "8899:8899"
+      - "8900:8900"
+      - "8000-8020:8000-8020/udp"
+      - "9900:9900"
+    volumes:
+      - ./validator_config/keys:/keys:ro
+      - ./validator_config/ledger:/app/ledger
+    command: [
+      "agave-validator",
+      "--identity", "/keys/validator-keypair.json",
+      "--vote-account", "/keys/vote-account-keypair.json",
+      "--known-validator", "dv1ZAGvdsz5hHLwWXsVnM94hWf1pjbKVau1QVkaMJ92",
+      "--known-validator", "dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV",
+      "--known-validator", "dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB",
+      "--known-validator", "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
+      "--only-known-rpc",
+      "--ledger", "/app/ledger",
+      "--rpc-port", "8899",
+      "--dynamic-port-range", "8000-8020",
+      "--entrypoint", "entrypoint.devnet.solana.com:8001",
+      "--entrypoint", "entrypoint2.devnet.solana.com:8001",
+      "--entrypoint", "entrypoint3.devnet.solana.com:8001",
+      "--entrypoint", "entrypoint4.devnet.solana.com:8001",
+      "--entrypoint", "entrypoint5.devnet.solana.com:8001",
+      "--expected-genesis-hash", "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+      "--wal-recovery-mode", "skip_any_corrupted_record",
+      "--limit-ledger-size"
+    ]
+    depends_on:
+      keygen:
+        condition: service_completed_successfully
+
+        
+
+  keygen:
+    image: solanalabs/solana:v1.18.26
+    container_name: agave-keygen
+    volumes:
+      - ./validator_config/keys:/keys
+    entrypoint: ["/bin/bash", "-c"] 
+    command: |
+      "
+      if [ ! -f /keys/validator-keypair.json ]; then
+        solana-keygen new --no-passphrase -o /keys/validator-keypair.json &&
+        solana-keygen new --no-passphrase -o /keys/vote-account-keypair.json &&
+        echo 'Keys generated successfully';
+      else
+        echo 'Using existing keys';
+      fi
+      exit 0
+      "
+    restart: no
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
