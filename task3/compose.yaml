@@ -1,11 +1,14 @@
 services:
   solana-validator:
-    image: agave-validator:v1.1
+    image: agave-validator:v1.2
     container_name: agave-validator
     restart: unless-stopped
+    environment:
+      - LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH 
     ports:
       - "8899:8899"
       - "8900:8900"
+      - "8000-8020:8000-8020"
       - "8000-8020:8000-8020/udp"
       - "9900:9900"
     volumes:

@@ -15,6 +15,6 @@ FROM debian:bookworm-slim
 
 COPY --from=builder /usr/local/cargo/bin/agave-validator /usr/local/bin/
 COPY --from=builder /target/perf-libs/* /usr/local/lib/
-EXPOSE 8000-8020/udp 8899-8902 9900
+EXPOSE 8000-8020 8000-8020/udp 8899-8902 9900
 
 CMD ["agave-validator"]
