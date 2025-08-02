@@ -18,4 +18,5 @@ COPY --from=builder /usr/src/agave/target/perf-libs /usr/local/lib/
 EXPOSE 8000-8020 8000-8020/udp 8899-8902 9900
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
-CMD ["agave-validator"]
+ENTRYPOINT ["agave-validator"]
+CMD ["--help"]

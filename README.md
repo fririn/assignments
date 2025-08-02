@@ -19,13 +19,13 @@
     
     Build it with "docker build -t name:tag .", then add the image in compose.yaml and do "docker compose up -d"
     
-    You'll need a public static IP in order to actually run a validator. I do not have such IP, but was able to run validator in devnet mode with --no-voting. It found RPC peer nodes and started syncing: 
+    You'll need a public static IP in order to actually run a validator. I do not have such IP, but was able to run validator in devnet with --no-voting. It found RPC peer nodes and started syncing: 
 
         [2025-08-02T11:55:20.200576531Z INFO  solana_file_download] Downloading 48177518042 bytes from http://60.244.89.49:8899/snapshot-398447112-HEMv7MDqUyqw4xz87TuReX3SEETm4KdMsp3N1a6Rj2va.tar.zst
         [2025-08-02T11:55:26.219121122Z INFO  solana_file_download] downloaded 2874280 bytes 0.0% 477572.0 bytes/s
         [2025-08-02T11:55:32.238339423Z INFO  solana_file_download] downloaded 6216264 bytes 0.0% 555219.0 bytes/s
 
-    Also [here](https://docs.anza.xyz/operations/guides/validator-start/#system-tuning) there are some instructions on configuring the environment for the validator.
+    [Here](https://docs.anza.xyz/operations/guides/validator-start/#system-tuning) there are some instructions on configuring the environment for the validator.
 
  - [x] **Task #4**
     > Write a script that compares the values of result and height from the following two endpoints:
