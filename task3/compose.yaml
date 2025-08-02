@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     environment:
       - LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH 
+    # environment:
+    #   - SOLANA_RPC_URL=http://solana-test-validator:8899
     ports:
       - "8899:8899"
       - "8900:8900"
@@ -17,32 +19,33 @@ services:
     command: [
       "agave-validator",
       "--identity", "/keys/validator-keypair.json",
-      "--vote-account", "/keys/vote-account-keypair.json",
+    # "--vote-account", "/keys/vote-account-keypair.json",
+      "--no-voting",
       "--known-validator", "dv1ZAGvdsz5hHLwWXsVnM94hWf1pjbKVau1QVkaMJ92",
-      "--known-validator", "dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV",
-      "--known-validator", "dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB",
-      "--known-validator", "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
-      "--only-known-rpc",
+    # "--known-validator", "dv1ZAGvdsz5hHLwWXsVnM94hWf1pjbKVau1QVkaMJ92",
+    # "--known-validator", "dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV",
+    # "--known-validator", "dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB",
+    # "--known-validator", "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
+    # "--only-known-rpc",
       "--ledger", "/app/ledger",
+      "--limit-ledger-size",
+      "--rpc-bind-address", "0.0.0.0",
       "--rpc-port", "8899",
       "--dynamic-port-range", "8000-8020",
       "--entrypoint", "entrypoint.devnet.solana.com:8001",
-      "--entrypoint", "entrypoint2.devnet.solana.com:8001",
-      "--entrypoint", "entrypoint3.devnet.solana.com:8001",
-      "--entrypoint", "entrypoint4.devnet.solana.com:8001",
-      "--entrypoint", "entrypoint5.devnet.solana.com:8001",
       "--expected-genesis-hash", "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
       "--wal-recovery-mode", "skip_any_corrupted_record",
-      "--limit-ledger-size"
+    # "--skip-startup-ledger-verification",
+      "--no-port-check",
+      "--maximum-local-snapshot-age", "500",
+      "--log", "/var/lib/agave/validator.log"
     ]
     depends_on:
       keygen:
         condition: service_completed_successfully
 
-        
-
   keygen:
-    image: solanalabs/solana:v1.18.26
+    image: solanalabs/solana:stable
     container_name: agave-keygen
     volumes:
       - ./validator_config/keys:/keys
@@ -59,7 +62,18 @@ services:
       exit 0
       "
     restart: no
-    ulimits:
-      nofile:
-        soft: 1000000
-        hard: 1000000
+    
+
+
+  # solana-test-validator:
+  #   image: solanalabs/solana:stable
+  #   container_name: solana_test_cluster
+  #   command: >
+  #     solana-test-validator
+  #     --bind-address 0.0.0.0
+  #     --rpc-bind-address 0.0.0.0
+  #     --ledger /opt/solana/test-ledger
+  #     --reset
+  #   ports:
+  #     - "8898:8899"
+  #
